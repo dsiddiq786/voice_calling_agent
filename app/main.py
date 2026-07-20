@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import Literal
 import os
+import asyncio
 
 import httpx
 from fastapi import FastAPI, File, HTTPException, UploadFile, WebSocket
@@ -73,19 +74,27 @@ async def realtime_conversation_token():
         raise HTTPException(503, "Realtime Fatima is not configured yet")
     try:
         async with httpx.AsyncClient(timeout=12) as client:
-            response = await client.get(
+            response, signed_response = await asyncio.gather(
+                client.get(
                 "https://api.elevenlabs.io/v1/convai/conversation/token",
                 params={"agent_id": agent_id},
                 headers={"xi-api-key": api_key},
+                ),
+                client.get(
+                    "https://api.elevenlabs.io/v1/convai/conversation/get-signed-url",
+                    params={"agent_id": agent_id},
+                    headers={"xi-api-key": api_key},
+                ),
             )
     except httpx.HTTPError as exc:
         raise HTTPException(503, "Could not reach the realtime voice service") from exc
     if response.status_code >= 300:
         raise HTTPException(503, "Realtime voice service rejected the session")
     token = response.json().get("token")
-    if not token:
+    signed_url = signed_response.json().get("signed_url") if signed_response.status_code < 300 else None
+    if not token or not signed_url:
         raise HTTPException(503, "Realtime voice service returned no session token")
-    return {"conversation_token": token}
+    return {"conversation_token": token, "signed_url": signed_url}
 
 
 @app.get("/api/menu")

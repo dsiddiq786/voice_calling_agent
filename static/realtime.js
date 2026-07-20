@@ -113,9 +113,7 @@
       const response = await fetch('/api/realtime/conversation-token');
       const data = await response.json();
       if (!response.ok || !data.conversation_token) throw new Error(data.detail || 'No realtime session token');
-      conversation = await window.ElevenLabsClient.Conversation.startSession({
-        conversationToken: data.conversation_token,
-        connectionType: 'webrtc',
+      const sessionCallbacks = {
         clientTools: {
           addToCart: (parameters) => cartTool('add', parameters),
           removeFromCart: (parameters) => cartTool('remove', parameters),
@@ -139,11 +137,30 @@
           addBubble(message, role === 'agent' ? 'agent' : 'customer');
           if (role === 'agent') caption.textContent = message;
         },
-      });
+      };
+      try {
+        conversation = await window.ElevenLabsClient.Conversation.startSession({
+          ...sessionCallbacks,
+          conversationToken: data.conversation_token,
+          connectionType: 'webrtc',
+        });
+      } catch (webrtcError) {
+        // LiveKit/WebRTC can be blocked by an embedded browser or network.
+        // The signed WebSocket session remains real-time ElevenLabs audio and
+        // uses the same Fatima agent and voice.
+        console.warn('WebRTC unavailable; switching to realtime voice fallback.', webrtcError);
+        setStage('thinking', 'Voice line connect ho rahi hai…');
+        conversation = await window.ElevenLabsClient.Conversation.startSession({
+          ...sessionCallbacks,
+          signedUrl: data.signed_url,
+          connectionType: 'websocket',
+        });
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Fatima realtime connection failed:', error);
       await closeRealtime();
-      alert('Realtime Fatima start nahi ho saki. Please refresh and try again.');
+      const reason = error?.message || 'Microphone ya network connection available nahi hai.';
+      alert(`Fatima connect nahi ho saki: ${reason}`);
     }
   }
 
