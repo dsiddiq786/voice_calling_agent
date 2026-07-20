@@ -11,7 +11,7 @@ from .agent import AgentUnavailable, apply_agent_message, llm_available
 from .engine import greeting
 from .live_speech import proxy_live_transcription
 from .menu import MENU
-from .models import CallMetricsRequest, MessageRequest, SessionCreateRequest
+from .models import CallMetricsRequest, CartItem, MessageRequest, RealtimeCartRequest, SessionCreateRequest
 from .speech import (
     speech_provider,
     romanize_transcript,
@@ -118,6 +118,50 @@ async def send_message(session_id: str, request: MessageRequest):
         raise HTTPException(503, str(exc)) from exc
     order = STORE.create_order(session) if should_create_order else None
     return {"session": session, "order": order}
+
+
+@app.post("/api/realtime/sessions/{session_id}/cart")
+def realtime_cart_action(session_id: str, request: RealtimeCartRequest):
+    """Small, deterministic tool surface for the realtime agent.
+
+    The LLM never calculates money or mutates the cart itself; the browser's
+    ElevenLabs client calls this local endpoint and returns the result to it.
+    """
+    try:
+        session = STORE.get_session(session_id)
+    except KeyError as exc:
+        raise HTTPException(404, "Session not found") from exc
+
+    if request.action == "summary":
+        return {"ok": True, "cart": session.cart, "total": session.total, "delivery_address": session.delivery_address}
+    if request.action == "set_delivery":
+        if len(request.address.strip()) < 8:
+            return {"ok": False, "message": "Address is too short; ask for house/building and area."}
+        session.delivery_address = request.address.strip()
+        return {"ok": True, "delivery_address": session.delivery_address, "total": session.total}
+    if request.action == "confirm":
+        if not session.cart:
+            return {"ok": False, "message": "Cart is empty."}
+        order = STORE.create_order(session)
+        session.state = "completed"
+        session.end_call_requested = True
+        return {"ok": True, "order_id": order.id, "cart": session.cart, "total": session.total}
+
+    matches = MENU.match_all(request.item_name)
+    if not matches:
+        return {"ok": False, "message": "No exact menu item matched.", "available_items": [item.name for item in MENU.items.values()]}
+    item = matches[0][0]
+    if request.action == "remove":
+        before = len(session.cart)
+        session.cart = [line for line in session.cart if line.item_id != item.id]
+        return {"ok": before != len(session.cart), "cart": session.cart, "total": session.total, "removed": item.name}
+
+    existing = next((line for line in session.cart if line.item_id == item.id), None)
+    if existing:
+        existing.quantity = min(20, existing.quantity + request.quantity)
+    else:
+        session.cart.append(CartItem(item_id=item.id, name=item.name, quantity=request.quantity, unit_price=item.price))
+    return {"ok": True, "added": item.name, "cart": session.cart, "total": session.total}
 
 
 @app.post("/api/sessions/{session_id}/call-summary")

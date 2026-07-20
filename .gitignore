@@ -1,8 +1,14 @@
 .venv/
+node_modules/
 __pycache__/
 .pytest_cache/
 *.pyc
 data/orders.json
 work/models/
+.env.*
+!.env.example
 .DS_Store
 .env
+*.log
+coverage.xml
+htmlcov/

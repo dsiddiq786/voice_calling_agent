@@ -46,6 +46,13 @@ class MessageRequest(BaseModel):
     text: str = Field(min_length=1, max_length=1000)
 
 
+class RealtimeCartRequest(BaseModel):
+    action: Literal["add", "remove", "summary", "set_delivery", "confirm"]
+    item_name: str = Field(default="", max_length=120)
+    quantity: int = Field(default=1, ge=1, le=20)
+    address: str = Field(default="", max_length=500)
+
+
 class SessionCreateRequest(BaseModel):
     caller_phone: Optional[str] = None
 

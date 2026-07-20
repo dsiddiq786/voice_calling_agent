@@ -1,59 +1,70 @@
-# NomNosh Voice Order MVP
+# Fatima — Real-time Restaurant Voice Agent
 
-Roman-Urdu restaurant order taker for Apple Silicon. Phase 1 proves the full ordering loop before telephone/SIP integration:
+Fatima is a local MVP for a Pakistani restaurant order-taking voice agent. It is designed for a natural Roman Urdu ordering experience, starting with NomNosh in Sahiwal and structured so the platform can later support multiple restaurants.
 
-1. Customer speaks or types an order.
-2. OpenAI powers Fatima's natural conversation and returns structured actions.
-3. The backend validates every action against the restaurant catalog.
-4. The customer confirms the itemized total.
-5. The confirmed order appears on the kitchen dashboard.
+## What works now
 
-OpenAI handles conversation, but it cannot directly invent or change catalog records. Item IDs, prices, cart mutations, and final confirmation are validated by the backend. If OpenAI is unavailable, the app falls back to the basic rule engine.
+- Real-time browser call using ElevenLabs WebRTC
+- Roman Urdu / English food-term conversation with a concise professional greeting
+- ElevenLabs Fatima voice, interruption handling, and live transcripts
+- Menu-aware suggestions and deal awareness
+- Live cart tools: add, remove, read total, save delivery address, and confirm order
+- Kitchen order dashboard
+- Deepgram STT and an existing OpenAI-powered text/serial-call fallback
 
-## API configuration
+## Architecture
 
-Create `.env` in the project root and add your keys. Never commit or paste real keys into chat.
+```text
+Customer microphone
+  → ElevenLabs WebRTC agent (speech, turn-taking, interruption)
+  → browser client tools
+  → FastAPI cart + menu validation
+  → kitchen orders dashboard
+```
+
+The realtime agent does not calculate prices or mutate orders itself. The local backend validates exact catalog items and totals before the UI is updated or an order is confirmed.
+
+## Requirements
+
+- macOS (Apple Silicon supported)
+- Python 3.11+ recommended
+- Node.js 20+
+- ElevenLabs API key and Fatima voice ID
+- Deepgram / OpenAI keys only if you also use the legacy fallback pipeline
+
+## Setup
+
+```bash
+cp .env.example .env
+./scripts/setup.sh
+NPM_CONFIG_CACHE=/tmp/fatima-npm npm install
+NOMNOSH_PORT=8026 ./scripts/run.sh
+```
+
+Open <http://127.0.0.1:8026/customer> and grant microphone access when prompted. Start a new call after any agent configuration change because realtime settings are loaded at call start.
+
+## Environment variables
+
+Never commit real credentials. Configure these in `.env`:
 
 ```dotenv
-OPENAI_API_KEY=your_openai_api_key
-OPENAI_MODEL=gpt-5.4-mini
-DEEPGRAM_API_KEY=your_deepgram_api_key
-AZURE_SPEECH_KEY=your_azure_speech_key
+ELEVENLABS_API_KEY=your_key
+ELEVENLABS_VOICE_ID=your_fatima_voice_id
+ELEVENLABS_FATIMA_AGENT_ID=your_realtime_agent_id
+
+# Optional legacy/fallback services
+OPENAI_API_KEY=your_key
+DEEPGRAM_API_KEY=your_key
+AZURE_SPEECH_KEY=your_key
 AZURE_SPEECH_REGION=eastus
-AZURE_SPEECH_VOICE=ur-PK-UzmaNeural
 ```
 
-`OPENAI_API_KEY` comes from the OpenAI Platform API Keys page. A ChatGPT subscription does not include API usage; API billing is managed separately on the Platform.
-
-## Quick start
-
-On macOS, double-click `Start NomNosh.command` and keep its Terminal window open.
-
-Or start it manually:
+## Tests
 
 ```bash
-./scripts/setup.sh
-./scripts/run.sh
+.venv/bin/pytest -q
 ```
 
-Open <http://127.0.0.1:8010/customer>. The restaurant dashboard is at <http://127.0.0.1:8010/dashboard>.
+## Scope note
 
-Run tests with:
-
-```bash
-./scripts/test.sh
-```
-
-## Voice pipeline
-
-The preferred live pipeline is Deepgram for Urdu speech recognition and Azure `ur-PK-UzmaNeural` for Fatima's voice. Local Whisper remains only as the offline fallback.
-
-```bash
-./scripts/install-speech.sh
-```
-
-The first local transcription downloads an open Whisper model. The default is the CPU-compatible `base` model. Override it with `NOMNOSH_WHISPER_MODEL`.
-
-## Important
-
-`data/menu.json` contains the NomNosh Sahiwal catalog imported from the restaurant website on 2026-07-19. Restaurant staff must still verify prices, variants, and availability before a real pilot.
+This is a local demo, not yet a production phone system. Production rollout needs SIP/telephony routing, persistent multi-tenant restaurant data, user authentication, monitoring, encrypted secrets, call recordings with consent, human transfer/failover, and a Pakistani telephone-audio evaluation set.
