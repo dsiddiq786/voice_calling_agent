@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Call Fatima — NomNosh</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <div class="brand"><span class="logo">N</span> NOMNOSH <span style="margin-left:auto"><a href="/" style="color:inherit">Home</a></span></div>
+    <section class="call-hero card">
+      <div>
+        <span class="status">Fatima is available</span>
+        <h1>Order over a call,<br>just like the real thing.</h1>
+        <p>Talk naturally in Urdu or Roman Urdu. Fatima will manage the order and send the confirmed result to the kitchen.</p>
+      </div>
+      <button id="call-fatima" class="call-button"><span>☎</span> Call Fatima</button>
+    </section>
+
+    <div class="customer-layout">
+      <section class="card chat">
+        <div><span class="status">Text mode</span><h2>Conversation transcript</h2></div>
+        <div id="messages" class="messages"></div>
+        <form id="composer" class="composer">
+          <button type="button" id="mic" class="ghost" title="Record">🎙</button>
+          <input id="message" autocomplete="off" placeholder="Say hello or place an order">
+          <button>Send</button>
+        </form>
+        <small id="hint">You can type here or use the Call Fatima experience above.</small>
+      </section>
+      <aside class="card cart">
+        <h2>Your order</h2><div id="cart"><div class="empty">No items yet</div></div>
+        <div class="total"><span>Total</span><span id="total">Rs. 0</span></div>
+        <div class="actions"><button class="secondary" id="finish">Bas, confirm karein</button><button class="ghost" id="new-order">New order</button></div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="call-screen" class="call-screen" aria-hidden="true">
+    <div class="call-top"><div><strong>NomNosh</strong><span>Voice order</span></div><div id="call-timer">00:00</div></div>
+    <div class="voice-stage">
+      <div id="voice-orb" class="voice-orb idle"><i></i><i></i><i></i><div class="avatar">F</div></div>
+      <h2>Fatima</h2><p id="call-state">Connecting…</p>
+      <div id="call-caption" class="call-caption">Nom Nosh call karne ka shukriya.</div>
+    </div>
+    <div class="call-controls">
+      <button id="call-mic" class="round-control mic-control" aria-label="Mute microphone">🎙<small>Listening</small></button>
+      <button id="end-call" class="round-control end-control" aria-label="End call">✕<small>End call</small></button>
+    </div>
+  </div>
+  <script src="/vendor/@elevenlabs/client/dist/lib.iife.js"></script>
+  <script src="/static/customer.js"></script>
+  <script src="/static/realtime.js"></script>
+</body>
+</html>

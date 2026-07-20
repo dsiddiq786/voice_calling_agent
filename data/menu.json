@@ -1,0 +1,84 @@
+{
+  "restaurant": {
+    "name": "NomNosh",
+    "phone": "0304 1118514",
+    "currency": "PKR",
+    "timezone": "Asia/Karachi",
+    "source": "https://www.nomnoshpizza.com/",
+    "source_checked_at": "2026-07-19",
+    "menu_needs_verification": false
+  },
+  "items": [
+    {"id":"hunger_buster_deal","name":"Hunger Buster Deal","price":2699,"category":"Delivery Deals","aliases":["hunger buster","hunger buster deal"],"details":["1 Chef Special Medium Pizza","1 Nom Max Burger","1 Nom Max Wrap","5 Flaming Wings","1.5 Ltr Drink"]},
+    {"id":"super_max_deal","name":"Super Max Deal","price":1499,"category":"Delivery Deals","aliases":["super max","super max deal"],"details":["2 Nom Max Burgers","5 Chicken Strips with Fries and Dip Sauce","500 ml Drink"]},
+    {"id":"mega_nosh_deal","name":"Mega Nosh Deal","price":2680,"category":"Mega Nosh Deal","aliases":["mega nosh","mega nosh deal"],"details":["1 Large Pizza","4 Pieces Injected Broast","1.5 Ltr Drink"]},
+
+    {"id":"deal_1","name":"Deal 1","price":700,"category":"Super Deals","aliases":["deal one","deal 1","ڈیل ون","ڈیل ایک"],"details":["1 Nom Max","Regular Fries","Regular Soft Drink"]},
+    {"id":"deal_2","name":"Deal 2","price":620,"category":"Super Deals","aliases":["deal two","deal 2","ڈیل ٹو","ڈیل دو"],"details":["1 Spice Burger","Regular Fries","Regular Soft Drink"]},
+    {"id":"deal_3","name":"Deal 3","price":1460,"category":"Super Deals","aliases":["deal three","deal 3","ڈیل تھری","ڈیل تین"],"details":["1 Medium Regular Flavor Pizza","5 Hot Wings","500 ml Soft Drink"]},
+    {"id":"deal_4","name":"Deal 4","price":2400,"category":"Super Deals","aliases":["deal four","deal 4","ڈیل فور","ڈیل چار"],"details":["1 Large Regular Flavor Pizza","20 Hot Shots","1.5 Litre Soft Drink"]},
+    {"id":"deal_5","name":"Deal 5","price":2320,"category":"Super Deals","aliases":["deal five","deal 5","ڈیل فائیو","ڈیل پانچ"],"details":["2 Medium Regular Flavor Pizzas","1.5 Litre Soft Drink"]},
+    {"id":"deal_6","name":"Deal 6","price":3150,"category":"Super Deals","aliases":["deal six","deal 6","ڈیل سکس","ڈیل چھ"],"details":["2 Large Regular Flavor Pizzas","1.5 Litre Soft Drink"]},
+
+    {"id":"oven_baked_wings","name":"Oven Baked Wings","price":340,"category":"Appetizers","aliases":["oven baked wings","baked wings"],"price_from":true},
+    {"id":"flaming_wings","name":"Flaming Wings","price":380,"category":"Appetizers","aliases":["flaming wings"],"price_from":true},
+    {"id":"cheese_stick","name":"Cheese Stick","price":600,"category":"Appetizers","aliases":["cheese stick","cheese sticks"]},
+    {"id":"kabab_sticks","name":"Kabab Sticks","price":700,"category":"Appetizers","aliases":["kabab sticks","kebab sticks"]},
+
+    {"id":"crown_crust_pizza","name":"Crown Crust Pizza","price":1450,"category":"Highly Recommended Pizzas","aliases":["crown crust","crown crust pizza"],"price_from":true},
+    {"id":"stuffed_crust_pizza","name":"Stuffed Crust Pizza","price":1550,"category":"Highly Recommended Pizzas","aliases":["stuffed crust","stuffed crust pizza"],"price_from":true},
+    {"id":"behari_kabab_pizza","name":"Behari Kabab Pizza","price":1450,"category":"Highly Recommended Pizzas","aliases":["behari kabab pizza","bihari kabab pizza"],"price_from":true},
+    {"id":"grill_bite_pizza","name":"Grill Bite Pizza","price":1550,"category":"Highly Recommended Pizzas","aliases":["grill bite","grill bite pizza"],"price_from":true},
+    {"id":"square_pizza","name":"Square Pizza","price":1550,"category":"Highly Recommended Pizzas","aliases":["square pizza"],"price_from":true},
+
+    {"id":"malai_boti_pizza","name":"Malai Boti Pizza","price":1350,"category":"Chef Special Pizzas","aliases":["malai boti pizza"],"price_from":true},
+    {"id":"bistro_pizza","name":"Bistro Pizza","price":1350,"category":"Chef Special Pizzas","aliases":["bistro pizza"],"price_from":true},
+    {"id":"all_the_meat","name":"All The Meat","price":1350,"category":"Chef Special Pizzas","aliases":["all the meat","all meat pizza"],"price_from":true},
+    {"id":"cheese_burst","name":"Cheese Burst","price":1350,"category":"Chef Special Pizzas","aliases":["cheese burst","cheese burst pizza"],"price_from":true},
+    {"id":"hand_toast_pizza","name":"Hand Toast Pizza","price":1350,"category":"Chef Special Pizzas","aliases":["hand toast","hand toast pizza"],"price_from":true},
+
+    {"id":"chicken_fajita","name":"Chicken Fajita","price":650,"category":"Regular Pizza Flavors","aliases":["chicken fajita","fajita pizza"],"price_from":true},
+    {"id":"chicken_supreme","name":"Chicken Supreme","price":650,"category":"Regular Pizza Flavors","aliases":["chicken supreme","supreme pizza"],"price_from":true},
+    {"id":"chicken_tikka","name":"Chicken Tikka","price":650,"category":"Regular Pizza Flavors","aliases":["chicken tikka","tikka pizza"],"price_from":true},
+    {"id":"cheese_lover","name":"Cheese Lover","price":650,"category":"Regular Pizza Flavors","aliases":["cheese lover","cheese lover pizza"],"price_from":true},
+    {"id":"fajita_sicilian","name":"Fajita Sicilian","price":650,"category":"Regular Pizza Flavors","aliases":["fajita sicilian","sicilian pizza"],"price_from":true},
+    {"id":"classic_euro","name":"Classic Euro","price":650,"category":"Regular Pizza Flavors","aliases":["classic euro","euro pizza"],"price_from":true},
+    {"id":"veggie_lover","name":"Veggie Lover","price":650,"category":"Regular Pizza Flavors","aliases":["veggie lover","veggie pizza","vegetable pizza"],"price_from":true},
+
+    {"id":"nom_d_max_burger","name":"Nom D Max Burger","price":650,"category":"Burgers","aliases":["nom d max","nom d max burger"]},
+    {"id":"nom_max_burger","name":"Nom Max Burger","price":480,"category":"Burgers","aliases":["nom max","nom max burger"]},
+    {"id":"grilled_chicken_burger","name":"Grilled Chicken Burger","price":590,"category":"Burgers","aliases":["grilled chicken burger","grill chicken burger","گرلڈ چکن برگر"]},
+    {"id":"chicken_patty_burger","name":"Chicken Patty Burger","price":390,"category":"Burgers","aliases":["chicken patty burger","chicken petty burger","چکن پیٹی برگر"]},
+    {"id":"spice_burger","name":"Spice Burger","price":360,"category":"Burgers","aliases":["spice burger","spicy burger","سپائسی برگر"]},
+
+    {"id":"injected_broast","name":"Injected Broast","price":1150,"category":"Fried Cravings","aliases":["injected broast","broast"],"price_from":true},
+    {"id":"hot_wings","name":"Hot Wings","price":360,"category":"Fried Cravings","aliases":["hot wings"],"price_from":true},
+    {"id":"loaded_fries","name":"Loaded Fries","price":800,"category":"Fried Cravings","aliases":["loaded fries"]},
+    {"id":"french_fries","name":"French Fries","price":300,"category":"Fried Cravings","aliases":["french fries","fries"],"price_from":true},
+    {"id":"crunchy_fries","name":"Crunchy Fries","price":500,"category":"Fried Cravings","aliases":["crunchy fries"]},
+    {"id":"fried_chicken_strips","name":"Fried Chicken Strips","price":600,"category":"Fried Cravings","aliases":["fried chicken strips","chicken strips"]},
+    {"id":"nuggets","name":"Nuggets","price":390,"category":"Fried Cravings","aliases":["nuggets","chicken nuggets"],"price_from":true},
+    {"id":"hotshots","name":"Hotshots","price":400,"category":"Fried Cravings","aliases":["hotshots","hot shots"]},
+    {"id":"arabian_bites","name":"Arabian Bites","price":950,"category":"Fried Cravings","aliases":["arabian bites"]},
+
+    {"id":"nomnosh_special_pasta","name":"NomNosh Special Pasta","price":560,"category":"Pastas","aliases":["nomnosh special pasta","special pasta"],"price_from":true},
+    {"id":"flaming_pasta","name":"Flaming Pasta","price":520,"category":"Pastas","aliases":["flaming pasta"],"price_from":true},
+
+    {"id":"calazone_chunks","name":"Calazone Chunks","price":1050,"category":"Sandwiches","aliases":["calazone chunks","calzone chunks"]},
+    {"id":"mexican_sandwich","name":"Mexican Sandwich","price":800,"category":"Sandwiches","aliases":["mexican sandwich"]},
+    {"id":"pizza_stacker","name":"Pizza Stacker","price":850,"category":"Sandwiches","aliases":["pizza stacker"]},
+
+    {"id":"nom_max_wrap","name":"Nom Max Wrap","price":650,"category":"Wraps & Rolls","aliases":["nom max wrap"]},
+    {"id":"peri_peri_wrap","name":"Peri Peri Wrap","price":620,"category":"Wraps & Rolls","aliases":["peri peri wrap","پیری پیری ریپ"]},
+    {"id":"malai_boti_wrap","name":"Malai Boti Wrap","price":620,"category":"Wraps & Rolls","aliases":["malai boti wrap","ملائی بوٹی ریپ"]},
+    {"id":"arabic_wrap","name":"Arabic Wrap","price":580,"category":"Wraps & Rolls","aliases":["arabic wrap","عریبک ریپ"]},
+    {"id":"behari_spin_rolls","name":"Behari Spin Rolls","price":630,"category":"Wraps & Rolls","aliases":["behari spin rolls","bihari spin roll","بہاری رول"]},
+    {"id":"arabic_roll","name":"Arabic Roll","price":520,"category":"Wraps & Rolls","aliases":["arabic roll","عریبک رول"]},
+
+    {"id":"nomnosh_special_platter","name":"NomNosh Special Platter","price":1120,"category":"Platters","aliases":["nomnosh special platter","special platter","نومنوش سپیشل پلیٹر"],"details":["4 Behari Rolls","5 Oven Baked Wings","Fries","Dip Sauce"]},
+    {"id":"behari_platter","name":"Behari Platter","price":1080,"category":"Platters","aliases":["behari platter","bihari platter","بہاری پلیٹر"],"details":["4 Behari Rolls","4 Arabic Rolls","Fries","Dip Sauce"]},
+
+    {"id":"soft_drink","name":"Soft Drink","price":90,"category":"Beverages","aliases":["soft drink","cold drink","drink"],"price_from":true},
+    {"id":"mineral_water","name":"Mineral Water","price":60,"category":"Beverages","aliases":["mineral water","water","pani","پانی"]}
+  ]
+}
